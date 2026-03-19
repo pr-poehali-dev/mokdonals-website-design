@@ -3,6 +3,14 @@ import Icon from "@/components/ui/icon";
 
 const HERO_IMG = "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/157f6c47-c06b-4710-802e-a38b32b57dec.jpg";
 
+const CATEGORY_IMAGES: Record<string, string> = {
+  burgers: "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/38c21afe-cea1-453d-aa16-6dce33c45fb6.jpg",
+  fries: "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/e9450753-94f1-46bd-b6da-d64ac5b226c7.jpg",
+  nuggets: "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/a76e56da-94a9-4f71-aeab-a493d07d27d7.jpg",
+  pies: "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/8ff75fcf-468d-4c0c-9e3a-7e64c6b4279b.jpg",
+  drinks: "https://cdn.poehali.dev/projects/36d7d3d7-b4f4-40ab-8c63-83e693d337c5/files/58775ff6-4361-46ae-b4d6-f0df95862bab.jpg",
+};
+
 const CATEGORIES = [
   { id: "burgers", label: "🍔 Бургеры" },
   { id: "fries", label: "🍟 Картошка" },
@@ -205,13 +213,16 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {filtered.map((item, idx) => (
               <div key={item.id}
-                className="menu-card rounded-3xl overflow-hidden animate-fade-in-up"
+                className="menu-card group rounded-3xl overflow-hidden animate-fade-in-up"
                 style={{ background: "var(--dark-card)", border: "1px solid rgba(255,195,0,0.08)", animationDelay: `${idx * 0.06}s` }}>
-                <div className="relative h-44 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, rgba(255,195,0,0.05) 0%, rgba(15,13,11,0.8) 100%)" }}>
-                  <span className="text-8xl select-none" style={{ filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.5))" }}>
-                    {item.emoji}
-                  </span>
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={CATEGORY_IMAGES[item.category]}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    style={{ filter: "brightness(0.88) saturate(1.15)" }}
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(15,13,11,0.7) 0%, transparent 60%)" }} />
                   {item.badge && (
                     <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold font-oswald tracking-wide"
                       style={{ background: "var(--yellow)", color: "#0F0D0B" }}>
